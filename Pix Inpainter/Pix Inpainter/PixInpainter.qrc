@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/PixInpainter"/>
+    <qresource prefix="/">
+        <file>icons/AiGenerate.png</file>
+        <file>icons/Elipse.png</file>
+        <file>icons/Eraser.png</file>
+        <file>icons/Eyedropper.png</file>
+        <file>icons/Fill.png</file>
+        <file>icons/Line.png</file>
+        <file>icons/Pen.png</file>
+        <file>icons/Rectangle.png</file>
+        <file>icons/Redo.png</file>
+        <file>icons/Triangle.png</file>
+        <file>icons/Undo.png</file>
+        <file>icons/ZoomIn.png</file>
+        <file>icons/ZoomOut.png</file>
+        <file>icons/AppIcon.png</file>
+    </qresource>
+</RCC>
