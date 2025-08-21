@@ -77,18 +77,18 @@ python run.py
 ### Main Window & Drawing Tools
 
 Shows the main interface with menu bar, toolbar, and canvas, along with selected drawing tools.
-<img width="1082" height="752" alt="MainWindow" src="https://github.com/user-attachments/assets/cf27f303-2a5e-46e8-b641-8bd561e804e4" />
-<img width="1082" height="752" alt="GridMainWindow" src="https://github.com/user-attachments/assets/9f57c609-bf04-4ddb-a341-2981e9e96c13" />
+<img width="1082" height="752" alt="MainWindow" src="images/MainWindow.png" />
+<img width="1082" height="752" alt="GridMainWindow" src="images/GridMainWindow.png" />
 
 ### AI-assisted Completion
 
 Example of AI inpainting on a user sketch. Left: original sketch, Right: completed sketch.
 
-<img width="1002" height="732" alt="GenWindow" src="https://github.com/user-attachments/assets/56fdf74d-d969-4c0f-b1f9-62f790d5053a" />
+<img width="1002" height="732" alt="GenWindow" src="images/GenWindow.png" />
 
 ### Multiple Model Comparison
 
 Comparison of different AI-generated results using available models.
 
-<img width="1002" height="732" alt="CompWindow" src="https://github.com/user-attachments/assets/2a977d55-c4de-4a90-a37c-03fe790d5905" />
+<img width="1002" height="732" alt="CompWindow" src="images/CompWindow.png" />
 
