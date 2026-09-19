@@ -108,37 +108,37 @@ private:
 
 private:
     Ui::PixInpainterClass m_ui;
-    paint::PaintWidget* m_paintWidget;
-    paint::AICompletionWidget* m_aiCompletionWidget;
+    paint::PaintWidget* m_paintWidget = nullptr;
+    paint::AICompletionWidget* m_aiCompletionWidget = nullptr;
 
-    QPushButton* m_leftColorBtn;
-    QPushButton* m_rightColorBtn;
+    QPushButton* m_leftColorBtn = nullptr;
+    QPushButton* m_rightColorBtn = nullptr;
 
-    QActionGroup* m_toolGroup;
-    QAction* m_penAction;
-    QAction* m_eraserAction;
-    QAction* m_fillAction;
-    QAction* m_eyedropperAction;
-    QAction* m_lineAction;
-    QAction* m_rectangleAction;
-    QAction* m_ellipseAction;
-    QAction* m_triangleAction;
-    QAction* m_previousToolAction;
+    QActionGroup* m_toolGroup = nullptr;
+    QAction* m_penAction = nullptr;
+    QAction* m_eraserAction = nullptr;
+    QAction* m_fillAction = nullptr;
+    QAction* m_eyedropperAction = nullptr;
+    QAction* m_lineAction = nullptr;
+    QAction* m_rectangleAction = nullptr;
+    QAction* m_ellipseAction = nullptr;
+    QAction* m_triangleAction = nullptr;
+    QAction* m_previousToolAction = nullptr;
 
-    QAction* m_AICompletionAction;
-    QAction* m_zoomInAction;
-    QAction* m_zoomOutAction;
+    QAction* m_AICompletionAction = nullptr;
+    QAction* m_zoomInAction = nullptr;
+    QAction* m_zoomOutAction = nullptr;
 
-    QCheckBox* m_gridCheckBox;
-    QComboBox* m_gridSizeComboBox;
+    QCheckBox* m_gridCheckBox = nullptr;
+    QComboBox* m_gridSizeComboBox = nullptr;
 
-    QComboBox* m_penSizeComboBox;
+    QComboBox* m_penSizeComboBox = nullptr;
     int m_currentPenSize = PEN_SIZE_MEDIUM;
 
-    paint::PaintController* m_paintController;
+    paint::PaintController* m_paintController = nullptr;
     paint::ICanvasModelPtr m_canvasModel;
 
-    paint::AICompletionModel* m_aiCompletionModel;
-    paint::AICompletionController* m_aiCompletionController;
+    paint::AICompletionModel* m_aiCompletionModel = nullptr;
+    paint::AICompletionController* m_aiCompletionController = nullptr;
 };
 

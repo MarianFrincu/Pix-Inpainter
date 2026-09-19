@@ -31,6 +31,7 @@ namespace paint
             disconnect(m_model, &AICompletionModel::comparisonFinished, this, &AICompletionController::onComparisonFinished);
             disconnect(m_model, &AICompletionModel::allComparisonsFinished, this, &AICompletionController::onAllComparisonsFinished);
             disconnect(m_model, &AICompletionModel::statusChanged, this, &AICompletionController::onStatusChanged);
+            disconnect(m_model, &AICompletionModel::modelsInitialized, this, &AICompletionController::onModelsInitialized);
         }
 
         m_model = model;
@@ -44,6 +45,7 @@ namespace paint
             connect(m_model, &AICompletionModel::comparisonFinished, this, &AICompletionController::onComparisonFinished);
             connect(m_model, &AICompletionModel::allComparisonsFinished, this, &AICompletionController::onAllComparisonsFinished);
             connect(m_model, &AICompletionModel::statusChanged, this, &AICompletionController::onStatusChanged);
+            connect(m_model, &AICompletionModel::modelsInitialized, this, &AICompletionController::onModelsInitialized);
 
             if (m_view && m_model)
             {
@@ -97,11 +99,6 @@ namespace paint
             connect(m_view, &AICompletionWidget::compareModelsRequested, this, &AICompletionController::onCompareModelsRequested);
             connect(m_view, &AICompletionWidget::modelSelectionChanged, this, &AICompletionController::onModelSelectionChanged);
             connect(m_view, &AICompletionWidget::previewImageChanged, this, &AICompletionController::onPreviewImageUpdated);
-        }
-        
-        if (m_model)
-        {
-            connect(m_model, &AICompletionModel::modelsInitialized, this, &AICompletionController::onModelsInitialized);
         }
     }
 

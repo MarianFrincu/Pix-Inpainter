@@ -39,38 +39,13 @@ The training process and model implementations can be found in the dedicated rep
 
 ## Installation & Build
 
-Pix Inpainter includes **Visual Studio solution files** for easy setup and comes with a separate Python AI server.
+Each part of the project has its own setup guide:
 
-### Desktop Application (C++ / Qt)
+* **Desktop application (C++ / Qt)** — see [`Pix_Inpainter/README.md`](Pix_Inpainter/README.md)
+* **AI server (Python)** — see [`ServerPy/README.md`](ServerPy/README.md)
 
-1. Clone this repository.
-2. Navigate to Pix Inpainter folder.
-3. Open the `.sln` file in **Visual Studio 2022** (or later).
-4. Make sure **Qt 6.x** is installed and integrated with Visual Studio.
-5. Build and run the project from Visual Studio.
-
-**Note:** Tested on **Windows only**.
-
-### AI Server (Python)
-
-The AI server provides inpainting via **REST API**. To run it:
-
-1. Navigate to the Python server folder.
-2. Install dependencies:
-
-```bash
-pip install flask numpy opencv-python
-```
-
-For PyTorch, follow the official guide: [PyTorch Installation](https://pytorch.org/get-started/locally/)
-
-3. Run the server:
-
-```bash
-python run.py
-```
-
-**Note:** The AI server runs locally on your machine.
+The application runs on its own; the AI server is only needed for the
+AI completion features.
 
 ## Screenshots
 

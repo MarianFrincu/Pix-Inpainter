@@ -1,0 +1,16 @@
+* text=auto
+
+*.cpp  text
+*.h    text
+*.ui   text
+*.qrc  text
+*.py   text
+*.md   text
+*.yml  text
+*.txt  text
+
+*.sh   text eol=lf
+
+*.png  binary
+*.pth  binary
+*.ico  binary

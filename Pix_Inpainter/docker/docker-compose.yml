@@ -1,0 +1,15 @@
+services:
+  pixinpainter:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: pixinpainter
+    container_name: pixinpainter
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_QPA_PLATFORM=xcb
+      - PIX_INPAINTER_SERVER_URL=${PIX_INPAINTER_SERVER_URL:-http://localhost:5000/}
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ${XAUTHORITY:-$HOME/.Xauthority}:/root/.Xauthority:rw
+    network_mode: host

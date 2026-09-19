@@ -6,7 +6,24 @@
 #include <QJsonArray>
 #include <QBuffer>
 
-const QString SERVER_BASE_URL = "http://localhost:5000/";
+namespace
+{
+    QString serverBaseUrl()
+    {
+        static const QString url = []() {
+            QString base = qEnvironmentVariable("PIX_INPAINTER_SERVER_URL",
+                                                "http://localhost:5000/");
+            if (!base.endsWith('/'))
+            {
+                base += '/';
+            }
+            return base;
+        }();
+        return url;
+    }
+    
+    constexpr int kRequestTimeoutMs = 30000;
+}
 
 namespace paint
 {
@@ -39,7 +56,8 @@ namespace paint
 
     void AICompletionModel::initializeModels()
     {
-        QNetworkRequest request(QUrl(SERVER_BASE_URL + "models"));
+        QNetworkRequest request(QUrl(serverBaseUrl() + "models"));
+        request.setTransferTimeout(kRequestTimeoutMs);
         QNetworkReply* reply = m_networkManager->get(request);
 
         connect(reply, &QNetworkReply::finished, this, [this, reply]() {
@@ -147,6 +165,7 @@ namespace paint
 
         QNetworkRequest request(buildRequestUrl("process", modelKey, postprocessValue));
         request.setHeader(QNetworkRequest::ContentTypeHeader, "image/png");
+        request.setTransferTimeout(kRequestTimeoutMs);
 
         if (m_currentReply)
         {
@@ -243,6 +262,7 @@ namespace paint
 
             QNetworkRequest request(buildRequestUrl("compare", modelKey, postprocessValue));
             request.setHeader(QNetworkRequest::ContentTypeHeader, "image/png");
+            request.setTransferTimeout(kRequestTimeoutMs);
 
             QNetworkReply* reply = m_networkManager->post(request, m_imageData);
 
@@ -341,7 +361,7 @@ namespace paint
 
     QUrl AICompletionModel::buildRequestUrl(const QString& endpoint, const QString& modelKey, int postprocessValue) const
     {
-        QUrl url(SERVER_BASE_URL + endpoint);
+        QUrl url(serverBaseUrl() + endpoint);
         QUrlQuery query;
         if (!modelKey.isEmpty()) {
             query.addQueryItem("model_id", modelKey);

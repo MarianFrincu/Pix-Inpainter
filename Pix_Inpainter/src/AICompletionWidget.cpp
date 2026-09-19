@@ -7,6 +7,31 @@
 #include <QGroupBox>
 #include <QSplitter>
 
+namespace
+{
+    void clearLayout(QLayout* layout)
+    {
+        if (!layout)
+        {
+            return;
+        }
+
+        QLayoutItem* item;
+        while ((item = layout->takeAt(0)) != nullptr)
+        {
+            if (QWidget* widget = item->widget())
+            {
+                delete widget;
+            }
+            if (QLayout* childLayout = item->layout())
+            {
+                clearLayout(childLayout);
+            }
+            delete item;
+        }
+    }
+}
+
 namespace paint
 {
     AICompletionWidget::AICompletionWidget(QWidget* parent)
@@ -227,39 +252,20 @@ namespace paint
         m_modelSelector->setSizeAdjustPolicy(QComboBox::AdjustToContents);
         m_modelSelector->updateGeometry();
 
-        for (QCheckBox* checkbox : std::as_const(m_modelCheckboxes)) {
-            if (checkbox) delete checkbox;
+        for (ZoomableImageWidget* widget : std::as_const(m_comparisonWidgets))
+        {
+            if (widget) widget->setParent(nullptr);
         }
+
+        clearLayout(m_modelsListLayout);
+        clearLayout(m_compResultsLayout);
+
+        qDeleteAll(m_comparisonWidgets);
+
         m_modelCheckboxes.clear();
-
-        for (QCheckBox* checkbox : std::as_const(m_comparePostprocessCheckboxes)) {
-            if (checkbox) delete checkbox;
-        }
         m_comparePostprocessCheckboxes.clear();
-
-        for (QSpinBox* spinbox : std::as_const(m_comparePostprocessSpinboxes)) {
-            if (spinbox) delete spinbox;
-        }
         m_comparePostprocessSpinboxes.clear();
-
-        for (ZoomableImageWidget* widget : std::as_const(m_comparisonWidgets)) {
-            if (widget) delete widget;
-        }
         m_comparisonWidgets.clear();
-
-        QLayoutItem* item;
-        if (m_modelsListLayout) {
-            while ((item = m_modelsListLayout->takeAt(0)) != nullptr) {
-                if (item->widget()) delete item->widget();
-                delete item;
-            }
-        }
-        if (m_compResultsLayout) {
-            while ((item = m_compResultsLayout->takeAt(0)) != nullptr) {
-                if (item->widget()) delete item->widget();
-                delete item;
-            }
-        }
 
         m_modelsListLayout->addSpacing(5);
 
@@ -401,17 +407,13 @@ namespace paint
     {
         emit modelSelectionChanged();
 
-        QLayoutItem* item;
-        while ((item = m_compResultsLayout->takeAt(0)) != nullptr) {
-            if (item->widget()) {
-                QList<ZoomableImageWidget*> childZiws = item->widget()->findChildren<ZoomableImageWidget*>();
-                for (ZoomableImageWidget* ziw : childZiws) {
-                    ziw->setParent(nullptr);
-                }
-                delete item->widget();
-            }
-            delete item;
+        // Detach the persistent comparison widgets so they survive the grid
+        // rebuild, then tear down the old grid container.
+        for (ZoomableImageWidget* ziw : std::as_const(m_comparisonWidgets))
+        {
+            if (ziw) ziw->setParent(nullptr);
         }
+        clearLayout(m_compResultsLayout);
 
         QWidget* gridContainer = new QWidget();
         QGridLayout* gridLayout = new QGridLayout(gridContainer);

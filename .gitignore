@@ -416,3 +416,23 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# CMake / Ninja build output (Linux & cross-platform build)
+build/
+Pix_Inpainter/build/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compile_commands.json
+.ninja_deps
+.ninja_log
+*_autogen/
+
+# Qt generated files
+ui_*.h
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+
+# Trained model weights (large, distributed separately)
+ServerPy/trained_models/
